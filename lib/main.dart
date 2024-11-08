@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx_ecom/controllers/auth_controller.dart';
+import 'package:flutter_getx_ecom/controllers/cart_controller.dart';
 import 'package:get/get.dart';
 
 import 'routes/app_pages.dart';
@@ -9,6 +10,7 @@ import 'screens/auth/login.dart';
 import 'themes/light_mode.dart';
 
 void main() {
+  Get.put(CartController());
   runApp(MyApp());
 }
 
@@ -26,8 +28,10 @@ class MyApp extends StatelessWidget {
         final AuthController authController = Get.put(AuthController());
         return authController.isAuth.value ? HomeScreen() : Login();
       }),
-      initialRoute: AppRoutes.initial, // Route ban đầu
-      getPages: AppPages.routes, // Các route của ứng dụng
+      // Route ban đầu
+      initialRoute: AppRoutes.initial,
+      // Các route của ứng dụng
+      getPages: AppPages.routes,
     );
   }
 }

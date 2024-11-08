@@ -89,7 +89,7 @@ class Product {
         id: json["id"],
         title: json["title"],
         description: json["description"],
-        category: categoryValues.map[json["category"]]!,
+        category: Category(json["category"]),
         price: json["price"]?.toDouble(),
         discountPercentage: json["discountPercentage"]?.toDouble(),
         rating: json["rating"]?.toDouble(),
@@ -114,7 +114,7 @@ class Product {
         "id": id,
         "title": title,
         "description": description,
-        "category": categoryValues.reverse[category],
+        "category": category.name,
         "price": price,
         "discountPercentage": discountPercentage,
         "rating": rating,
@@ -141,14 +141,14 @@ enum AvailabilityStatus { IN_STOCK, LOW_STOCK }
 final availabilityStatusValues = EnumValues(
     {"In Stock": AvailabilityStatus.IN_STOCK, "Low Stock": AvailabilityStatus.LOW_STOCK});
 
-enum Category { BEAUTY, FRAGRANCES, FURNITURE, GROCERIES }
+class Category {
+  final String name;
 
-final categoryValues = EnumValues({
-  "beauty": Category.BEAUTY,
-  "fragrances": Category.FRAGRANCES,
-  "furniture": Category.FURNITURE,
-  "groceries": Category.GROCERIES
-});
+  Category(this.name);
+
+  @override
+  String toString() => name;
+}
 
 class Dimensions {
   double width;

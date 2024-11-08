@@ -15,6 +15,7 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Hiển thị hình ảnh sản phẩm
           Expanded(
             child: Stack(
               children: [
@@ -26,11 +27,13 @@ class ProductCard extends StatelessWidget {
               ],
             ),
           ),
+          // Hiển thị thông tin sản phẩm
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Hiển thị tên sản phẩm
                 Text(
                   product.title,
                   maxLines: 2,
@@ -38,6 +41,7 @@ class ProductCard extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 4),
+                // Hiển thị giá sản phẩm
                 Text(
                   '\$${product.price}',
                   style: const TextStyle(
@@ -46,6 +50,7 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
+                // Nút "Add to Cart"
                 ElevatedButton(
                   onPressed: () => cartController.addToCart(product),
                   style: ElevatedButton.styleFrom(

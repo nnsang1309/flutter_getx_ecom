@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../routes/app_routes.dart';
-import 'login.dart';
 
 class Signup extends StatelessWidget {
   // static route name
   static String routeName = "/signup";
 
-  // text controller
+  // Khai báo các controller cho các trường nhập liệu
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -32,87 +31,62 @@ class Signup extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-
                 const SizedBox(height: 50.0),
-
+                // Name
                 TextField(
                   controller: nameController,
                   decoration: const InputDecoration(
                     hintText: "Enter your name",
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
+                // Email
                 TextField(
                   controller: emailController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Email address",
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
+                // Password
                 TextField(
                   controller: passwordController,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Password",
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
+                // Confirm password
                 TextField(
                   controller: confirmPasswordController,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Confirm password",
                   ),
                 ),
-                SizedBox(height: 24.0),
+                const SizedBox(height: 24.0),
+                // Nút đăng ký
                 ElevatedButton(
                   onPressed: () {
-                    // Handle sign up logic
+                    // Xử lý logic đăng ký
                   },
-                  child: Text("SIGN UP"),
+                  child: const Text("SIGN UP"),
                 ),
-                SizedBox(height: 16.0),
-
-                // sign up with
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     Text("or sign up with"),
-                //     SizedBox(width: 8.0),
-                //     IconButton(
-                //       onPressed: () {
-                //         // Handle Apple sign up
-                //       },
-                //       icon: Image.asset("assets/apple_logo.png"),
-                //     ),
-                //     IconButton(
-                //       onPressed: () {
-                //         // Handle Google sign up
-                //       },
-                //       icon: Image.asset("assets/google_logo.png"),
-                //     ),
-                //     IconButton(
-                //       onPressed: () {
-                //         // Handle Facebook sign up
-                //       },
-                //       icon: Image.asset("assets/facebook_logo.png"),
-                //     ),
-                //   ],
-                // ),
-
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
+                // Phần chuyển hướng đến trang đăng nhập
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Already have account?"),
-                    SizedBox(width: 8.0),
+                    const Text("Already have account?"),
+                    const SizedBox(width: 8.0),
                     GestureDetector(
                       onTap: () {
-                        // Navigate to login screen
-
+                        // Chuyển hướng đến màn hình đăng nhập
                         Get.toNamed(AppRoutes.login);
                       },
-                      child: Text(
+                      child: const Text(
                         "Log In",
                         style: TextStyle(
                           color: Colors.blue,

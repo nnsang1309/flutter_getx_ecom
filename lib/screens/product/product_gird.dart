@@ -16,6 +16,19 @@ class ProductGrid extends GetView<ProductController> {
           if (controller.isLoading.value) {
             return const Center(child: CircularProgressIndicator());
           }
+
+          final displayProducts = controller.selectedCategory.value.isEmpty
+              ? controller.products
+              : controller.products
+                  .where((product) =>
+                      product.category.name.toLowerCase() ==
+                      controller.selectedCategory.value.toLowerCase())
+                  .toList();
+
+          if (displayProducts.isEmpty) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
           return GridView.builder(
             padding: const EdgeInsets.all(10),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -24,9 +37,9 @@ class ProductGrid extends GetView<ProductController> {
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
             ),
-            itemCount: controller.products.length,
+            itemCount: displayProducts.length,
             itemBuilder: (context, index) {
-              final product = controller.products[index];
+              final product = displayProducts[index];
               return ProductCard(product: product);
             },
           );

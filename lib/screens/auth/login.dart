@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import '../../controllers/auth_controller.dart';
 import '../../routes/app_routes.dart';
-import '../home_page.dart';
 
 class Login extends StatelessWidget {
   static String routeName = "/login";
@@ -48,7 +47,7 @@ class Login extends StatelessWidget {
                 TextField(
                   controller: passwordController,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "Password",
                   ),
                 ),
@@ -64,20 +63,20 @@ class Login extends StatelessWidget {
                     );
                     Get.offAllNamed(AppRoutes.home);
                   },
-                  child: Text("Log In"),
+                  child: const Text("Log In"),
                 ),
                 // Phần chuyển hướng đến trang đăng ký
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Already have account?"),
-                    SizedBox(width: 8.0),
+                    const Text("Already have account?"),
+                    const SizedBox(width: 8.0),
                     GestureDetector(
                       onTap: () {
                         // Chuyển hướng đến màn hình đăng ký
                         Get.toNamed(AppRoutes.signup);
                       },
-                      child: Text(
+                      child: const Text(
                         "Sign Up",
                         style: TextStyle(
                           color: Colors.blue,

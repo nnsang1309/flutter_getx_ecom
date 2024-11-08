@@ -15,11 +15,14 @@ class CartScreen extends GetView<CartController> {
         ),
         body: Obx(
           () {
+            // Kiểm tra nếu giỏ hàng trống
             if (controller.cartItems.isEmpty) {
               return const Center(child: Text('No items in cart'));
             }
+            // Hiển thị danh sách sản phẩm trong giỏ hàng
             return Column(
               children: [
+                // Danh sách sản phẩm
                 Expanded(
                   child: ListView.builder(
                     itemCount: controller.cartItems.length,
@@ -29,6 +32,7 @@ class CartScreen extends GetView<CartController> {
                     },
                   ),
                 ),
+                // Phần tổng cộng và nút thanh toán
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -37,17 +41,18 @@ class CartScreen extends GetView<CartController> {
                   ),
                   child: Column(
                     children: [
+                      // Hiển thị tổng tiền
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Total:',
+                          const Text('Total:',
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               )),
                           Text(
                             '\$${controller.total.toStringAsFixed(2)}',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.green,
@@ -55,17 +60,21 @@ class CartScreen extends GetView<CartController> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
+                      // Nút thanh toán
                       ElevatedButton(
-                          onPressed: () => controller.checkout(),
-                          child: Text('Checkout',
-                              style: TextStyle(
-                                color: Get.theme.colorScheme.onPrimary,
-                              )),
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: Size(double.infinity, 60),
-                            backgroundColor: Get.theme.colorScheme.primary,
-                          )),
+                        onPressed: () => controller.checkout(),
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(double.infinity, 60),
+                          backgroundColor: Get.theme.colorScheme.primary,
+                        ),
+                        child: Text(
+                          'Checkout',
+                          style: TextStyle(
+                            color: Get.theme.colorScheme.onPrimary,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -73,7 +82,7 @@ class CartScreen extends GetView<CartController> {
             );
           },
         ),
-        // bottom navigation bar
+        // Thanh điều hướng dưới cùng
         bottomNavigationBar: const BottomNavBar(currentIndex: 2));
   }
 }

@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(15.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -76,12 +76,13 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
 
+                  const SizedBox(height: 10),
+
                   // categories
-                  _buildCategories(),
+                  _buildCategories(context),
 
                   // products
-                  // _buildProducts(),
-                  ProductGrid()
+                  ProductGrid(),
                 ],
               ),
             ),
@@ -93,84 +94,77 @@ class HomeScreen extends StatelessWidget {
   }
 
   // build categories
-  Widget _buildCategories() {
-    final categories = [
-      {'icon': Icons.food_bank_outlined, 'label': 'Groceries'}, // Thực phẩm
-      {'icon': Icons.chair_outlined, 'label': 'Furniture'}, // Nội thất
-      {'icon': Icons.sunny, 'label': 'Fragrances'}, // Nước hoa
-      {'icon': Icons.face_outlined, 'label': 'Beauty'}, // Chăm sóc sắc đẹp
-    ];
+  Widget _buildCategories(BuildContext context) {
+    final Map<String, IconData> categoryIcons = {
+      'beauty': Icons.face_outlined,
+      'fragrances': Icons.sunny,
+      'furniture': Icons.chair_outlined,
+      'groceries': Icons.shopping_basket,
+    };
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: categories.map((category) {
-          return Column(
-            children: [
-              IconButton(
-                icon: Icon(category['icon'] as IconData),
-                onPressed: () {},
-                color: Colors.black,
-                padding: const EdgeInsets.all(10),
-                style: IconButton.styleFrom(
-                  backgroundColor: Colors.grey[100],
-                  shape: const CircleBorder(),
-                ),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                category['label'] as String,
-                style: const TextStyle(fontSize: 12),
-              ),
-            ],
-          );
-        }).toList(),
-      ),
-    );
-  }
+    final Map<String, String> categoryNames = {
+      'fragrances': 'Nước hoa',
+      'groceries': 'Tạp hóa',
+      'furniture': 'Nội thất',
+      'beauty': 'Làm đẹp'
+    };
 
-  // build products
-  Widget _buildProducts() {
     return Obx(() {
-      if (productController.isLoading.value) {
-        return Center(child: CircularProgressIndicator());
-      } else if (productController.products.isEmpty) {
-        return Center(child: Text('No products found'));
-      } else {
-        return GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 0.6,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-          ),
-          itemCount: productController.products.length,
-          itemBuilder: (context, index) {
-            final product = productController.products[index];
-            return Card(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 200,
-                    child: Image.network(
-                      product.thumbnail,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(product.title),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
+      if (productController.categories.isEmpty) {
+        return const Center(child: CircularProgressIndicator());
       }
+
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: productController.categories.map((category) {
+            final bool isSelected = productController.selectedCategory.value == category;
+            final bool isLoading = productController.loadingCategorySlug.value == category;
+
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        categoryIcons[category] ?? Icons.category,
+                      ),
+                      onPressed:
+                          isLoading ? null : () => productController.selectCategory(category),
+                      color: isSelected ? Colors.blue : Colors.black,
+                      style: IconButton.styleFrom(
+                        backgroundColor:
+                            isSelected ? Colors.blue.withOpacity(0.1) : Colors.grey[100],
+                        shape: const CircleBorder(),
+                      ),
+                    ),
+                    if (isLoading)
+                      const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                        ),
+                      ),
+                  ],
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  categoryNames[category] ?? category,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: isSelected ? Colors.blue : Colors.black,
+                  ),
+                ),
+              ],
+            );
+          }).toList(),
+        ),
+      );
     });
   }
 

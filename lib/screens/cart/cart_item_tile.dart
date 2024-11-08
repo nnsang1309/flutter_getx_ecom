@@ -26,13 +26,13 @@ class CartItemTile extends StatelessWidget {
               height: 80,
               fit: BoxFit.cover,
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(item.product.title),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   Text('${item.product.price}'),
                 ],
               ),
@@ -40,12 +40,12 @@ class CartItemTile extends StatelessWidget {
             Row(
               children: [
                 IconButton(
-                  icon: Icon(Icons.remove),
+                  icon: const Icon(Icons.remove),
                   onPressed: () => cartController.decreaseQuantity(item.product),
                 ),
                 Text(item.quantity.toString()),
                 IconButton(
-                  icon: Icon(Icons.add),
+                  icon: const Icon(Icons.add),
                   onPressed: () => cartController.increaseQuantity(item.product),
                 ),
               ],

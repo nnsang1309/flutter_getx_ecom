@@ -1,19 +1,9 @@
-class Category {
-  final String slug;
+class CategoryModel {
   final String name;
-  final String url;
+  final String slug;
 
-  Category({
-    required this.slug,
+  CategoryModel({
     required this.name,
-    required this.url,
+    required this.slug,
   });
-
-  factory Category.fromJson(Map<String, dynamic> json) {
-    return Category(
-      slug: json['slug'],
-      name: json['name'],
-      url: json['url'],
-    );
-  }
 }
