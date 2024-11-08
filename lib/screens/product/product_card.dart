@@ -50,17 +50,23 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 8),
-                // Nút "Add to Cart"
-                ElevatedButton(
-                  onPressed: () => cartController.addToCart(product),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 36),
-                    backgroundColor: Get.theme.colorScheme.primary,
-                  ),
-                  child: Text(
-                    'Add to Cart',
-                    style: TextStyle(
-                      color: Get.theme.colorScheme.onPrimary,
+                // Nút "Add to Cart" với hiệu ứng gợn sóng
+                Material(
+                  color: Get.theme.colorScheme.primary,
+                  borderRadius: BorderRadius.circular(4),
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(4),
+                    onTap: () => cartController.addToCart(product),
+                    child: Container(
+                      width: double.infinity,
+                      height: 36,
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Add to Cart',
+                        style: TextStyle(
+                          color: Get.theme.colorScheme.onPrimary,
+                        ),
+                      ),
                     ),
                   ),
                 ),

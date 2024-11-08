@@ -13,10 +13,12 @@ class ProductGrid extends GetView<ProductController> {
       child: SizedBox(
         height: 600,
         child: Obx(() {
+          // Kiểm tra xem đang tải dữ liệu hay không
           if (controller.isLoading.value) {
             return const Center(child: CircularProgressIndicator());
           }
 
+          // Lọc sản phẩm dựa trên danh mục đã chọn
           final displayProducts = controller.selectedCategory.value.isEmpty
               ? controller.products
               : controller.products
@@ -29,6 +31,7 @@ class ProductGrid extends GetView<ProductController> {
             return const Center(child: CircularProgressIndicator());
           }
 
+          // Tạo lưới sản phẩm sử dụng GridView.builder
           return GridView.builder(
             padding: const EdgeInsets.all(10),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -14,7 +14,6 @@ class ProductController extends GetxController {
   final filteredProducts = <Product>[].obs;
   final loadingCategorySlug = ''.obs;
 
-  // Thêm constant cho category names
   static const Map<String, String> categoryNames = {
     'fragrances': 'Nước hoa',
     'groceries': 'Tạp hóa',
@@ -66,7 +65,7 @@ class ProductController extends GetxController {
     try {
       var response = await http.get(Uri.parse('https://dummyjson.com/products/categories'));
       if (response.statusCode == 200) {
-        final List<dynamic> categoriesJson = jsonDecode(response.body);
+        // final List<dynamic> categoriesJson = jsonDecode(response.body);
         final Map<String, String> categoryNames = {
           'fragrances': 'Nước hoa',
           'groceries': 'Tạp hóa',

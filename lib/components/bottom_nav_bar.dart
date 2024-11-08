@@ -16,6 +16,7 @@ class BottomNavBar extends StatelessWidget {
           return BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             currentIndex: currentIndex,
+            // Xử lý sự kiện khi tab được chọn
             onTap: (index) {
               switch (index) {
                 case 0:
@@ -41,10 +42,12 @@ class BottomNavBar extends StatelessWidget {
                 icon: Icon(Icons.search),
                 label: 'Search',
               ),
+              // Item Cart với badge hiển thị số lượng sản phẩm
               BottomNavigationBarItem(
                 icon: Stack(
                   children: [
                     const Icon(Icons.shopping_cart),
+                    // Hiển thị badge khi có sản phẩm trong giỏ hàng
                     Positioned(
                       top: 0,
                       right: 0,
